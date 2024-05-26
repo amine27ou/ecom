@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+*{
+    font-family: "Karla", sans-serif;
+}
+.card{
+    overflow: hidden;
+}
+.card .layer{
+    top:-100%;
+    transition: all .4s;
+}
+.card:hover .layer{
+    top: 0;
+
+}
