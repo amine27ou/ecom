@@ -10,13 +10,12 @@ import { useAuthContext } from '../contexts/AuthContext';
 
 export default function ClientLayout() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, getUser,logoutUser } = useAuthContext();
+  const { user, getUser, logoutUser } = useAuthContext();
   const [profileNav, setProfileNav] = useState(false);
-  
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [getUser]);
 
   return (
     <>
@@ -50,17 +49,21 @@ export default function ClientLayout() {
           >
             Blog
           </NavLink>
-          {!user && (
+          {!user || Object.values(user).every(value => value === null || value === undefined || value === '') ? (
             <NavLink to="/login" className="hover:text-yellow-600">
               Log In
             </NavLink>
-          )}
-          {user.role ==='client' ? (
+          ) : (
             <div className='flex items-center flex-row gap-2 relative cursor-pointer' onClick={() => setProfileNav(!profileNav)}>
               <FaUserCircle className="text-2xl" />
               <h1>{user.first_name} {user.last_name}</h1>
               {profileNav && (
                 <div className='bg-white border shadow-lg h-max w-[140px] flex flex-col items-start z-30 rounded-md absolute top-10'>
+                  {user.role === 'admin' && (
+                    <span className='hover:bg-gray-300 p-2 w-full transition-all'>
+                      <Link to="/dashboard">Dashboard</Link>
+                    </span>
+                  )}
                   <span className='hover:bg-gray-300 p-2 w-full transition-all'>
                     <Link to="/profile">Profile</Link>
                   </span>
@@ -70,23 +73,7 @@ export default function ClientLayout() {
                 </div>
               )}
             </div>
-          )  : user.role==='admin' ? <div className='flex items-center flex-row gap-2 relative cursor-pointer' onClick={() => setProfileNav(!profileNav)}>
-          <FaUserCircle className="text-2xl" />
-          <h1>{user.first_name} {user.last_name}</h1>
-          {profileNav && (
-            <div className='bg-white border shadow-lg h-max w-[140px] flex flex-col items-start z-30 rounded-md absolute top-10'>
-              <span className='hover:bg-gray-300 p-2 w-full transition-all'>
-                <Link to="/dashboard">Dashboard</Link>
-              </span>
-              <span className='hover:bg-gray-300 p-2 w-full transition-all'>
-                <Link to="/profile">Profile</Link>
-              </span>
-              <span className='hover:bg-gray-300 p-2 w-full transition-all'>
-                <button onClick={logoutUser}>Logout</button>
-              </span>
-            </div>
           )}
-        </div>: <Link to='/login'>Login</Link>}
           <NavLink to="/cart">
             <CiShoppingCart className="text-2xl" />
           </NavLink>
@@ -102,7 +89,7 @@ export default function ClientLayout() {
           )}
         </div>
         {isOpen && (
-          <div className="bg-white flex flex-col pt-20 fixed shadow-md w-1/2 p-4 top-0 right-0 bottom-0 z-10">
+          <div className="md:hidden bg-white flex flex-col pt-20 fixed shadow-md w-1/2 p-4 top-0 right-0 bottom-0 z-10">
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? 'text-yellow-600' : 'text-black')}
@@ -127,17 +114,28 @@ export default function ClientLayout() {
             >
               Blog
             </NavLink>
-            {user ? (
-              <>
-                <h1>{user.first_name} {user.last_name}</h1>
-                <button onClick={logoutUser} className="hover:text-yellow-600">
-                  Logout
-                </button>
-              </>
-            ) : (
+            {!user || Object.values(user).every(value => value === null || value === undefined || value === '') ? (
               <NavLink to="/login" className="hover:text-yellow-600">
                 Log In
               </NavLink>
+            ) : (
+              <div className='flex flex-col'>
+                <Link to='/profile' className='flex items-center gap-2'>
+                  <FaUserCircle className="text-2xl" />
+                  <h1>{user.first_name} {user.last_name}</h1>
+                </Link>
+                {user.role === 'admin' && (
+                  <span>
+                    <Link className='hover:text-yellow-600' to="/dashboard">Dashboard</Link>
+                  </span>
+                )}
+                <span>
+                  <Link className='hover:text-yellow-600' to="/profile">Profile</Link>
+                </span>
+                <span>
+                  <button className='hover:text-yellow-600' onClick={logoutUser}>Logout</button>
+                </span>
+              </div>
             )}
             <NavLink to="/cart">
               <CiShoppingCart className="text-2xl cursor-pointer" />
