@@ -10,14 +10,12 @@ export default function LoginForm() {
     const [formData, setFormData] = useState({});
     const navigate = useNavigate()
     useEffect(()=>{
-        if(!user){
-            getUser()
+        if(user){
             navigate('/')
         }
-        else{
-            navigate('/login')
-        }
-    },[])
+        
+    },[ getUser,navigate])    
+    
 
     const handleChange = (e) => {
         setFormData(prevState => ({ ...prevState, [e.target.name]: e.target.value }));

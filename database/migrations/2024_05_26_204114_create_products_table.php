@@ -19,9 +19,11 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('quantity');
             $table->string('main_image');
-            $table->string('second_image');
-            $table->string('third_image');
-            $table->boolean('isAvailable');
+            $table->string('second_image')->nullable();
+            $table->string('third_image')->nullable();
+            $table->string('isAvailable')->default(false);
+            $table->foreignId('added_by')->constrained('users');
+            $table->foreignId('updated_by')->constrained('users');
             $table->timestamps();
         });
     }

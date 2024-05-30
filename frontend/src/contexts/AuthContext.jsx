@@ -6,7 +6,7 @@ import axios from 'axios';
 const LoginContext = createContext();
 
 export default function AuthContext({ children }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -21,7 +21,8 @@ export default function AuthContext({ children }) {
       const response = await axiosClient.get('api/user');
       setUser(response.data);
     } catch (error) {
-      
+      setUser(null);
+      navigate('/')
     }
   };
 

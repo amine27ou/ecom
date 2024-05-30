@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,7 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
             'first_name' => 'Amine',
@@ -21,5 +23,8 @@ class DatabaseSeeder extends Seeder
             'password'=>'12345678',
             'role'=>'admin'
         ]);
+
+        Product::factory(10)->create();
+        Order::factory(10)->create();
     }
 }

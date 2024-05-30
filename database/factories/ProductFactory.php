@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,8 +26,9 @@ class ProductFactory extends Factory
             'main_image'=>fake()->imageUrl(),
             'second_image'=>fake()->imageUrl(),
             'third_image'=>fake()->imageUrl(),
-            'isAvailable'=>fake()->boolean(),
-            
+            'isAvailable'=>fake()->randomElement(['true','false']),
+            'added_by'=>User::first(),
+            'updated_by'=>User::first(),
         ];
     }
 }

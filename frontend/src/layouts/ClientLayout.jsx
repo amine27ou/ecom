@@ -15,7 +15,7 @@ export default function ClientLayout() {
 
   useEffect(() => {
     getUser();
-  }, [getUser]);
+  }, []);
 
   return (
     <>
