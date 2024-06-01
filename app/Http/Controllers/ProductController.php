@@ -11,6 +11,10 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('index');
+    }
     public function index(){
         $products = Product::all();
         return response()->json([

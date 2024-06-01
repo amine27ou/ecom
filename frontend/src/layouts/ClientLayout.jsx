@@ -7,11 +7,13 @@ import Footer from '../components/client-side/Footer';
 import { CiShoppingCart } from 'react-icons/ci';
 import { FaUserCircle } from 'react-icons/fa';
 import { useAuthContext } from '../contexts/AuthContext';
+import { FaChevronLeft } from "react-icons/fa";
 
 export default function ClientLayout() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, getUser, logoutUser } = useAuthContext();
   const [profileNav, setProfileNav] = useState(false);
+  const [cartIsOpen, setCartIsOpen] = useState(false);
 
   useEffect(() => {
     getUser();
@@ -20,7 +22,7 @@ export default function ClientLayout() {
   return (
     <>
       <div className="flex items-center justify-between p-4 relative">
-        <div className="logo flex items-center flex-col space-x-2">
+        <div className="logo flex flex-col items-center space-x-2">
           <img className="w-20" src={Logo} alt="Giovanni Meanswear Logo" />
           <p className="font-bold">Giovanni Meanswear</p>
         </div>
@@ -54,11 +56,11 @@ export default function ClientLayout() {
               Log In
             </NavLink>
           ) : (
-            <div className='flex items-center flex-row gap-2 relative cursor-pointer' onClick={() => setProfileNav(!profileNav)}>
+            <div className='flex items-center gap-2 relative cursor-pointer' onClick={() => setProfileNav(!profileNav)}>
               <FaUserCircle className="text-2xl" />
               <h1>{user.first_name} {user.last_name}</h1>
               {profileNav && (
-                <div className='bg-white border shadow-lg h-max w-[140px] flex flex-col items-start z-30 rounded-md absolute top-10'>
+                <div className='bg-white border shadow-lg w-[140px] flex flex-col items-start z-30 rounded-md absolute top-10'>
                   {user.role === 'admin' && (
                     <span className='hover:bg-gray-300 p-2 w-full transition-all'>
                       <Link to="/dashboard">Dashboard</Link>
@@ -74,9 +76,18 @@ export default function ClientLayout() {
               )}
             </div>
           )}
-          <NavLink to="/cart">
-            <CiShoppingCart className="text-2xl" />
-          </NavLink>
+          <span onClick={() => { setCartIsOpen(!cartIsOpen) }}>
+            <CiShoppingCart className="text-2xl cursor-pointer" />
+          </span>
+          <div className={`fixed top-0 bottom-0 h-full ${cartIsOpen ? 'w-[300px] right-0' : 'w-0 -right-[500px]'} z-20 transition-all duration-200 ease-in`}>
+            <div className='bg-black p-5 text-white flex items-center gap-10'>
+              <FaChevronLeft className='cursor-pointer' onClick={() => { setCartIsOpen(false) }} />
+              <h1 className='text-2xl text-center'>Cart</h1>
+            </div>
+            <div className='bg-white p-5 h-full'>
+
+            </div>
+          </div>
         </div>
         <div
           className="hamburger md:hidden absolute right-4 z-20"

@@ -11,5 +11,23 @@
 }
 .card:hover .layer{
     top: 0;
-
+}
+.img-container{
+    position: relative;
+    overflow: hidden;
+}
+.quick-view{
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.776);
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 3px;
+    bottom: -50px;
+    transition: all .4s;
+}
+.product:hover .quick-view{
+    transition: all .4s;
+    bottom: 0;
+    
 }

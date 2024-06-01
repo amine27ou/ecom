@@ -3,10 +3,9 @@ import Header from './Header';
 import cate1 from '../../assets/cate11.jpg';
 import cate2 from '../../assets/cate2.jpg';
 import { Link } from 'react-router-dom';
-import Products from './Products';
 import Categories from './Categories';
 import Services from './Services';
-import Footer from './Footer';
+import ProductsList from './ProductsList';
 
 export default function Home() {
   return (
@@ -27,8 +26,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-        <Products/>
         <Categories/>
+        <ProductsList/>
         <Services/>
     </div>
   );
