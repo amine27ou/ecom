@@ -7,6 +7,8 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import { Link } from 'react-router-dom';
 import { IoMdClose } from "react-icons/io";
+import { useCartContext } from '../../contexts/CartContext';
+
 
 export default function ProductsList() {
   const [products, setProducts] = useState([]);
@@ -16,6 +18,7 @@ export default function ProductsList() {
   });
   const [selectedImage,setSelectedImage] = useState('')
   const [loading, setLoading] = useState(true);
+  const {handleAddProduct} = useCartContext()
 
   const fetchProducts = async () => {
     try {
@@ -25,7 +28,7 @@ export default function ProductsList() {
         setProducts(response.data.products);
       }
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   };
 
@@ -75,7 +78,7 @@ export default function ProductsList() {
                 <label className='mt-2'>Quantity</label>
                 <input type='number' name='quantity' className='border outline-none p-2 my-5 w-[50px]' />
                 <p>{quickView.product.description}</p>
-                <button className='bg-yellow-600 text-white p-2 rounded-md outline-none my-2'>Add to Cart</button>
+                <button onClick={()=>{handleAddProduct(quickView.product)}} className='bg-yellow-600 w-1/3 text-white p-2 rounded-md outline-none my-2'>Add to Cart</button>
                 <Link className='underline' to={`/product/${quickView?.product.id}`}>view more details</Link>
 
             </div>

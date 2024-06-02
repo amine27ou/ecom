@@ -8,12 +8,14 @@ import { CiShoppingCart } from 'react-icons/ci';
 import { FaUserCircle } from 'react-icons/fa';
 import { useAuthContext } from '../contexts/AuthContext';
 import { FaChevronLeft } from "react-icons/fa";
+import { useCartContext } from '../contexts/CartContext';
 
 export default function ClientLayout() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, getUser, logoutUser } = useAuthContext();
   const [profileNav, setProfileNav] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
+  const {cart,handleAddProduct,handleDeleteProduct} = useCartContext()  
 
   useEffect(() => {
     getUser();
@@ -84,9 +86,24 @@ export default function ClientLayout() {
               <FaChevronLeft className='cursor-pointer' onClick={() => { setCartIsOpen(false) }} />
               <h1 className='text-2xl text-center'>Cart</h1>
             </div>
-            <div className='bg-white p-5 h-full'>
-
+            <div className='bg-white flex flex-col gap-2 shadow-md p-5 h-full'>
+              {cart.length > 0  ? cart.map(product=>(
+                <div className='flex border shadow-sm items-center justify-between flex-row  p-3' >
+                  <img  src={
+                      product.main_image.includes('product_')
+                          ? `${import.meta.env.VITE_BACKEND_URL}storage/products/${product.main_image}`
+                          : product.main_image
+                      } className='w-[100px] ' />
+                      <div>
+                        <Link className='font-bold' to={`/products/${product.id}`}>{product.name}</Link>
+                        <p className='text-gray-500'>${product.price}.00</p>
+                        <button className='underline' onClick={()=>{handleDeleteProduct(product.id)}}>Remove from cart</button>
+                      </div>
+                      <hr/>
+                </div>
+              )) : <p>Cart is empty!</p> }
             </div>
+
           </div>
         </div>
         <div

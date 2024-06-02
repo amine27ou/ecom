@@ -12,6 +12,7 @@ import UpdateProduct from "../components/admin-side/products/UpdateProduct";
 import ShowProduct from "../components/admin-side/products/ShowProduct";
 import Orders from "../components/admin-side/orders/Orders";
 import UpdateOrder from "../components/admin-side/orders/UpdateOrder";
+import CartContext from "../contexts/CartContext";
 
 export const router = createBrowserRouter([
     
@@ -24,7 +25,11 @@ export const router = createBrowserRouter([
         element:<AuthContext><RegisterForm/></AuthContext>
     },
     {
-        element: <AuthContext><ClientLayout /></AuthContext>,
+        element: <AuthContext>
+            <CartContext>
+                <ClientLayout />
+            </CartContext>
+        </AuthContext>,
         children: [
             {
                 path: '/',
