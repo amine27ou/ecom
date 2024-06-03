@@ -31,3 +31,8 @@
     bottom: 0;
     
 }
+.swiper-button-next, .swiper-button-prev {
+    color: rgb(192, 141, 4) !important;
+    font-size: 20px;
+    font-weight: bolder;    
+  }

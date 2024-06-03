@@ -86,9 +86,9 @@ export default function ClientLayout() {
               <FaChevronLeft className='cursor-pointer' onClick={() => { setCartIsOpen(false) }} />
               <h1 className='text-2xl text-center'>Cart</h1>
             </div>
-            <div className='bg-white flex flex-col gap-2 shadow-md p-5 h-full'>
+            <div className='overflow-y-scroll bg-white flex flex-col gap-2 shadow-md p-5 h-full'>
               {cart.length > 0  ? cart.map(product=>(
-                <div className='flex border shadow-sm items-center justify-between flex-row  p-3' >
+                <div className='flex gap-3 border shadow-sm items-center justify-between flex-row  p-3' >
                   <img  src={
                       product.main_image.includes('product_')
                           ? `${import.meta.env.VITE_BACKEND_URL}storage/products/${product.main_image}`
@@ -101,7 +101,12 @@ export default function ClientLayout() {
                       </div>
                       <hr/>
                 </div>
-              )) : <p>Cart is empty!</p> }
+              )) 
+              : <p>Cart is empty!</p> }
+              <div className='bg-white relative left-0 rounded-md p-4  right-0 bottom-5 my-10 shadow-md border flex items-center justify-between flex-row'>
+                              <Link className=' w-max bg-yellow-600 text-white p-2 text-center rounded-md' to='/cart'>View Cart</Link>
+                              <p>{cart.length} {cart.length > 1 ? 'items' :'item' }</p>
+              </div>
             </div>
 
           </div>

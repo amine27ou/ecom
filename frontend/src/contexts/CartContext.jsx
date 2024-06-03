@@ -6,9 +6,13 @@ export default function CartProvider({ children }) {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart-items')) || []);
 
     const handleAddProduct = (product) => {
-        setCart((prevCart) => [...prevCart, product]);
-        localStorage.setItem('cart-items',JSON.stringify(cart))
+        setCart((prevCart) => {
+            const updatedCart = prevCart.some(prod => prod.id === product.id) ? prevCart : [...prevCart, product];
+            localStorage.setItem('cart-items', JSON.stringify(updatedCart));
+            return updatedCart;
+        });
     };
+    
 
     const handleDeleteProduct = (id) => {
         setCart((prevCart) => prevCart.filter((product) => product.id !== id));

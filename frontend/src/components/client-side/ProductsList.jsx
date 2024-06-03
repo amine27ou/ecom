@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { axiosClient } from '../../api/axios';
 import 'swiper/css';
+import 'swiper/css/navigation'; 
 import 'swiper/css/autoplay';
 import { Link } from 'react-router-dom';
 import { IoMdClose } from "react-icons/io";
@@ -44,8 +45,8 @@ export default function ProductsList() {
   return (
     <>
       {quickView.open && (
-        <div className='z-20 fixed  top-0 bottom-0 left-0 right-0 bg-black bg-opacity-35 flex items-center justify-center'>
-          <div className='flex  justify-between bg-white p-10 relative'>
+        <div className='z-20 fixed pt-[430px] top-0 md:bottom-0 md:left-0 overflow-y-scroll h-full md:right-0 bg-black bg-opacity-35 flex items-center  justify-center'>
+          <div className='flex flex-col md:flex-row justify-between bg-white md:p-10 p-20 relative'>
             <IoMdClose className='absolute top-5 right-5 cursor-pointer text-2xl' onClick={() => setQuickView({ open: false, product: {} })} />
             <div>
                 <img src={
@@ -85,10 +86,48 @@ export default function ProductsList() {
           </div>
         </div>
       )}
-      <Swiper
+      <h1 className='font-bold text-3xl text-center my-10 hover:text-yellow-600
+      hover:-translate-y-2 transition-all cursor-pointer'>Our Products</h1>
+      {window.innerWidth < 700 ? 
+        <div className='bg-gray-200 p-10 grid grid-cols-2 gap-5 my-20'>
+          
+          {products.map((product) => (
+              <div className='product w-[200px] h-[210px] p-5 bg-white flex items-center justify-center flex-col'>
+                <Link to={`/products/${product.id}`}>
+                  <div className='img-container '>
+                    <img
+                      src={
+                        product?.main_image?.includes('product_')
+                          ? `http://127.0.0.1:8000/storage/products/${product.main_image}`
+                          : product.main_image
+                      }
+                      className='w-[200px]'
+                      alt={product.name}
+                    />
+                    <div
+                      className='quick-view '
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setQuickView({ open: true, product });
+
+                    }}
+                    >
+                      <p>Quick View</p>
+                    </div>
+                  </div>
+                </Link>
+                <div className='md:mt-5 p-2'>
+                  <p>{product.name}</p>
+                  <p className='text-center text-gray-500'>${product.price}.00</p>
+                </div>
+              </div>
+          ))
+        }
+        </div>
+      : <Swiper
         modules={[Pagination, Navigation]}
         spaceBetween={50}
-        slidesPerView={4}
+        slidesPerView={ 4}
         navigation
         pagination={{ clickable: true }}
         className='bg-gray-200 p-10 mt-10'
@@ -98,7 +137,7 @@ export default function ProductsList() {
         ) : (
           products.map((product) => (
             <SwiperSlide key={product.id}>
-              <div className='product p-5 bg-white flex items-center justify-center flex-col'>
+              <div className='product w-[200px]  p-5 md:p-[25px] bg-white flex items-center justify-center flex-col'>
                 <Link to={`/products/${product.id}`}>
                   <div className='img-container'>
                     <img
@@ -111,7 +150,7 @@ export default function ProductsList() {
                       alt={product.name}
                     />
                     <div
-                      className='quick-view'
+                      className='quick-view '
                       onClick={(e) => {
                         e.preventDefault();
                         setQuickView({ open: true, product });
@@ -122,15 +161,15 @@ export default function ProductsList() {
                     </div>
                   </div>
                 </Link>
-                <div className='mt-5'>
+                <div className='md:mt-5 p-2'>
                   <p>{product.name}</p>
-                  <p className='text-center'>${product.price}.00</p>
+                  <p className='text-center text-gray-500'>${product.price}.00</p>
                 </div>
               </div>
             </SwiperSlide>
           ))
         )}
-      </Swiper>
+      </Swiper>}
     </>
   );
 }
