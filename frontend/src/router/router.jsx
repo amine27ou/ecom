@@ -13,6 +13,7 @@ import ShowProduct from "../components/admin-side/products/ShowProduct";
 import Orders from "../components/admin-side/orders/Orders";
 import UpdateOrder from "../components/admin-side/orders/UpdateOrder";
 import CartContext from "../contexts/CartContext";
+import CartPage from "../components/client-side/CartPage";
 
 export const router = createBrowserRouter([
     
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
             {
                 path: '/store',
                 element: <p className="text-red-500">Store</p>,
+            },
+            {
+                path: '/cart',
+                element: <CartPage/>,
             },
         ],
     },

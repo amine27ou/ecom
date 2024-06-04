@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import {  Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import Slide1 from '../../assets/slide1.jpg';
@@ -10,10 +10,9 @@ import { Link } from 'react-router-dom';
 export default function Header() {
   return (
     <Swiper
-      modules={[Pagination, Navigation, Autoplay]}
+      modules={[Pagination, Autoplay]}
       spaceBetween={50}
       slidesPerView={1}
-      navigation
       pagination={{ clickable: true }}
       loop={true}
       autoplay={{

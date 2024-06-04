@@ -104,8 +104,8 @@ export default function ClientLayout() {
               )) 
               : <p>Cart is empty!</p> }
               <div className='bg-white relative left-0 rounded-md p-4  right-0 bottom-5 my-10 shadow-md border flex items-center justify-between flex-row'>
-                              <Link className=' w-max bg-yellow-600 text-white p-2 text-center rounded-md' to='/cart'>View Cart</Link>
-                              <p>{cart.length} {cart.length > 1 ? 'items' :'item' }</p>
+                      <Link className=' w-max bg-yellow-600 text-white p-2 text-center rounded-md' to='/cart'>View Cart</Link>
+                      <p>{cart.length} {cart.length > 1 ? 'items' :'item' }</p>
               </div>
             </div>
 
