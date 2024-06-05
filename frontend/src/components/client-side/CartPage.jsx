@@ -25,7 +25,7 @@ export default function CartPage() {
       <div>
         <h1 className='text-2xl my-10'>My Cart</h1>
       </div>
-      <div className='flex items-start justify-between'>
+      <div className='flex items-start justify-center gap-20'>
         {cart.length >= 1 ? (
           <div className='flex flex-col gap-5'>
             {cart.map((product, index) => (

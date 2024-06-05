@@ -15,7 +15,7 @@ export default function ClientLayout() {
   const { user, getUser, logoutUser } = useAuthContext();
   const [profileNav, setProfileNav] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
-  const {cart,handleAddProduct,handleDeleteProduct} = useCartContext()  
+  const {cart,handleDeleteProduct} = useCartContext()  
 
   useEffect(() => {
     getUser();
