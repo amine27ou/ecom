@@ -22,7 +22,7 @@ export default function AuthContext({ children }) {
       setUser(response.data);
     } catch (error) {
       setUser(null);
-      // navigate('/')
+      navigate('/')
     }
   };
 

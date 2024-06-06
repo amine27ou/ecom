@@ -12,13 +12,13 @@ import { useCartContext } from '../contexts/CartContext';
 
 export default function ClientLayout() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, getUser, logoutUser } = useAuthContext();
+  const { user, setUser, logoutUser,getUser } = useAuthContext();
   const [profileNav, setProfileNav] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
   const {cart,handleDeleteProduct} = useCartContext()  
 
   useEffect(() => {
-    getUser();
+    getUser()
   }, []);
 
   return (
