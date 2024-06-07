@@ -3,13 +3,11 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import Loading from '../Loading';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { axiosClient } from '../../api/axios';
-import { useCartContext } from '../../contexts/CartContext';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 export default function Checkout() {
   const [shippingAddress, setShippingAddress] = useState('');
   const [errors, setErrors] = useState({});
-  const { cart } = useCartContext();
   const [loading, setLoading] = useState(false);
   const { user } = useAuthContext();
   const location = useLocation();
@@ -23,17 +21,14 @@ export default function Checkout() {
     e.preventDefault();
     setLoading(true);
     setErrors({});
-    
-    const total = location.state; 
+
+    const { orderItems, total } = location.state;
+
     const dataToSend = {
       user_id: user.id,
       shipping_address: shippingAddress,
       total_amount: total,
-      order_items: cart.map(item => ({
-        product_id: item.id,
-        quantity: item.quantity,
-        price: item.price,
-      })),
+      order_items: orderItems,
     };
 
     try {
@@ -55,7 +50,7 @@ export default function Checkout() {
   return (
     <div>
       <div className="bg-gray-100 p-10 ">
-        <h1 className='font-bold '>Your Total is: ${location.state}.00</h1>
+        <h1 className='font-bold '>Your Total is: ${location.state.total}.00</h1>
 
         {!user || Object.values(user).every(value => value === null || value === undefined || value === '')
           ? <Loading color='black' />

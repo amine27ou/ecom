@@ -29,8 +29,12 @@ export default function CartPage() {
 
   const handleCheckout = (e) => {
     e.preventDefault();
-    const total = calculateSubtotal();
-    navigate('/cart/checkout', { state: total });
+    const orderItems = localCart.map((product) => ({
+      product_id: product.product_id,
+      quantity: product.quantity,
+      price: product.price
+    }));
+    navigate('/cart/checkout', { state: { orderItems, total: calculateSubtotal() } });
   };
 
   return (
