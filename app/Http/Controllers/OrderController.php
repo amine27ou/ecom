@@ -26,22 +26,23 @@ class OrderController extends Controller
     $data = $request->validate([
         'total_amount' => 'required|integer',
         'shipping_address' => 'required',
-        'order_items' => 'required|array', // assuming order_items is an array of items
-        'order_items.*.product_id' => 'required|integer|exists:products,product_id', // validate each item
+        'order_items' => 'required|array', 
+        'order_items.*.product_id' => 'required|integer|exists:products,id', 
         'order_items.*.quantity' => 'required|integer|min:1',
         'order_items.*.price' => 'required|numeric|min:0',
     ]);
 
     $user = Auth::user();
 
-    $data['user_id'] = $user->id;
-    $data['status'] = 'pending';
-    $data['order_date'] = now();
+    $orderData = [
+        'user_id' => $user->id,
+        'total_amount' => $data['total_amount'],
+        'shipping_address' => $data['shipping_address'],
+        'status' => 'pending',
+        'order_date' => now(),
+    ];
+    $order = Order::create($orderData);
 
-    // Create the order
-    $order = Order::create($data);
-
-    // Create the order items
     foreach ($data['order_items'] as $item) {
         OrderItem::create([
             'order_id' => $order->id,
@@ -51,11 +52,11 @@ class OrderController extends Controller
         ]);
     }
 
-    // Return a successful response
     return response()->json([
         'message' => 'Order placed successfully!'
     ]);
 }
+
     // public function update(Request $request,Order $order){
     //     $data = $request->validate([
     //         'user_id'=>'nullable',

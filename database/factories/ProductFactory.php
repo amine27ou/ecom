@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'name'=>fake()->name(),
             'description'=>fake()->paragraph(),
             'price'=>fake()->numberBetween(50,400),
-            'quantity'=>fake()->numberBetween(1,30),
+            'product_quantity'=>fake()->numberBetween(1,30),
             'main_image'=>fake()->imageUrl(),
             'second_image'=>fake()->imageUrl(),
             'third_image'=>fake()->imageUrl(),
