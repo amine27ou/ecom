@@ -6,23 +6,24 @@ import { GoTag } from 'react-icons/go';
 
 export default function CartPage() {
   const { cart, handleDeleteProduct } = useCartContext();
-  const [quantities, setQuantities] = useState([]);
+  const [localCart, setLocalCart] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const initialQuantities = cart.map((product) => product.quantity);
-    setQuantities(initialQuantities);
+    setLocalCart(cart);
   }, [cart]);
 
-  const handleQuantityChange = (index, value) => {
-    const newQuantities = [...quantities];
-    newQuantities[index] = Number(value);
-    setQuantities(newQuantities);
+  const handleQuantityChange = (product, value) => {
+    const newCart = localCart.map((item) =>
+      item.product_id === product.product_id ? { ...item, quantity: Number(value) } : item
+    );
+    setLocalCart(newCart);
+    localStorage.setItem('cart-items', JSON.stringify(newCart));
   };
 
   const calculateSubtotal = () => {
-    return cart.reduce((acc, product, index) => {
-      return acc + product.price * quantities[index];
+    return localCart.reduce((acc, product) => {
+      return acc + product.price * product.quantity;
     }, 0);
   };
 
@@ -38,9 +39,9 @@ export default function CartPage() {
         <h1 className='text-2xl my-10'>My Cart</h1>
       </div>
       <div className='flex items-start justify-center gap-20'>
-        {cart.length >= 1 ? (
+        {localCart.length >= 1 ? (
           <div className='flex flex-col gap-5'>
-            {cart.map((product, index) => (
+            {localCart.map((product) => (
               <div key={product.product_id} className='flex items-center gap-5'>
                 <div className='img-container border'>
                   <img
@@ -55,13 +56,13 @@ export default function CartPage() {
                 </div>
                 <div>
                   <p>{product.name}</p>
-                  <p>${(product.price * quantities[index]).toFixed(2)}</p>
+                  <p>${(product.price * product.quantity).toFixed(2)}</p>
                 </div>
                 <input
                   type='number'
                   name='quantity'
-                  value={quantities[index]}
-                  onChange={(e) => handleQuantityChange(index, e.target.value)}
+                  value={product.quantity}
+                  onChange={(e) => handleQuantityChange(product, e.target.value)}
                   min={1}
                   max={10}
                   className='border border-black bg-gray-200 w-[50px]'
@@ -81,7 +82,7 @@ export default function CartPage() {
             </Link>
           </div>
         )}
-        {cart.length >= 1 && (
+        {localCart.length >= 1 && (
           <div>
             <h1 className='text-4xl mb-5'>Order Summary</h1>
             <div className='flex gap-5 flex-col'>
@@ -97,7 +98,7 @@ export default function CartPage() {
           </div>
         )}
       </div>
-      {cart.length >= 1 && (
+      {localCart.length >= 1 && (
         <div className='my-10'>
           <h3 className='text-yellow-700 flex items-center gap-3'>
             <GoTag /> Enter a Promo Code
