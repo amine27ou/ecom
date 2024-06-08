@@ -15,6 +15,7 @@ import UpdateOrder from "../components/admin-side/orders/UpdateOrder";
 import CartContext from "../contexts/CartContext";
 import CartPage from "../components/client-side/CartPage";
 import Checkout from "../components/client-side/Checkout";
+import ShowProductDetails from "../components/client-side/ShowProductDetails";
 
 export const router = createBrowserRouter([
     
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
             {
                 path: '/cart/checkout',
                 element: <Checkout/>,
+            },
+            {
+                path: '/product/:id',
+                element: <ShowProductDetails/>,
             },
         ],
     },

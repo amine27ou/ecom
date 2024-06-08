@@ -177,7 +177,7 @@ export default function ProductsList() {
           ) : (
             products.map((product) => (
               <SwiperSlide key={product.id}>
-                <div className='product w-[200px] h-[210px] p-5 bg-white flex items-center justify-center flex-col'>
+                <div className='product w-[200px] h-[250px] p-5 bg-white flex items-center justify-center flex-col'>
                   <Link to={`/products/${product.id}`}>
                     <div className='img-container '>
                       <img

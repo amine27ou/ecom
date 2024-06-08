@@ -13,7 +13,6 @@ export default function ShowProduct() {
     const fetchProduct = async(id)=>{
         try{
             const response = await axiosClient.get(`${import.meta.env.VITE_BACKEND_URL}api/products/${id}`)
-            console.log(response)
             if(response.status === 200){
                 setProduct(response.data.product)
                 setCreator(response.data.added_by)
