@@ -25,7 +25,7 @@ export default function CartProvider({ children }) {
                 return [...prevCart, updatedProduct];
             }
         });
-    };
+    }; 
     
 
     const handleDeleteProduct = (id) => {
