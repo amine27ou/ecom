@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useCartContext } from '../../contexts/CartContext';
+import { useCartContext } from '../../../contexts/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdClose } from 'react-icons/md';
 import { GoTag } from 'react-icons/go';

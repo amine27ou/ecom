@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
-import { axiosClient } from '../../api/axios';
-import Loading from '../Loading';
-import { useCartContext } from '../../contexts/CartContext';
+import { axiosClient } from '../../../api/axios';
+import Loading from '../../Loading';
+import { useCartContext } from '../../../contexts/CartContext';
 
 export default function ShowProductDetails() {
   const [product, setProduct] = useState({});
@@ -63,7 +63,7 @@ export default function ShowProductDetails() {
             <div className='bg-gray-200 p-10 flex items-start justify-center gap-20 flex-row'>
               <div>
                 <img src={selectedImage.includes('product_') ? `http://127.0.0.1:8000/storage/products/${selectedImage}` : selectedImage} className='w-[320px]' />
-                <div className='flex flex-row p-2 gap-2'>
+                <div className='flex flex-row pt-2 gap-2'>
                   <img src={product.main_image.includes('product_') ? `http://127.0.0.1:8000/storage/products/${product.main_image}` : product.main_image} className='w-[100px] cursor-pointer border' onClick={() => { setSelectedImage(product.main_image) }} />
                   <img src={product.second_image.includes('product_') ? `http://127.0.0.1:8000/storage/products/${product.second_image}` : product.second_image} className='w-[100px] cursor-pointer border' onClick={() => { setSelectedImage(product.second_image) }} />
                   <img src={product.third_image.includes('product_') ? `http://127.0.0.1:8000/storage/products/${product.third_image}` : product.third_image} className='w-[100px] cursor-pointer border' onClick={() => { setSelectedImage(product.third_image) }} />

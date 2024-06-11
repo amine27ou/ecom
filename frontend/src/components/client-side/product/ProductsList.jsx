@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Loading from '../Loading';
+import Loading from '../../Loading';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
-import { axiosClient } from '../../api/axios';
+import { axiosClient } from '../../../api/axios';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Link } from 'react-router-dom';
 import { IoMdClose } from "react-icons/io";
-import { useCartContext } from '../../contexts/CartContext';
+import { useCartContext } from '../../../contexts/CartContext';
 
 export default function ProductsList() {
   const [products, setProducts] = useState([]);

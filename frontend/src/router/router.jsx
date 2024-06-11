@@ -13,9 +13,10 @@ import ShowProduct from "../components/admin-side/products/ShowProduct";
 import Orders from "../components/admin-side/orders/Orders";
 import UpdateOrder from "../components/admin-side/orders/UpdateOrder";
 import CartContext from "../contexts/CartContext";
-import CartPage from "../components/client-side/CartPage";
-import Checkout from "../components/client-side/Checkout";
-import ShowProductDetails from "../components/client-side/ShowProductDetails";
+import CartPage from "../components/client-side/cart/CartPage";
+import Checkout from "../components/client-side/cart/Checkout";
+import ShowProductDetails from "../components/client-side/product/ShowProductDetails";
+import Blogs from "../components/client-side/blogs/Blogs";
 
 export const router = createBrowserRouter([
     
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
             {
                 path: '/product/:id',
                 element: <ShowProductDetails/>,
+            },
+            {
+                path: '/blog',
+                element: <Blogs/>,
             },
         ],
     },

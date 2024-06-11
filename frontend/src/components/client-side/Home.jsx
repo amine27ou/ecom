@@ -5,7 +5,7 @@ import cate2 from '../../assets/cate2.jpg';
 import { Link } from 'react-router-dom';
 import Categories from './Categories';
 import Services from './Services';
-import ProductsList from './ProductsList';
+import ProductsList from './product/ProductsList';
 
 export default function Home() {
   return (

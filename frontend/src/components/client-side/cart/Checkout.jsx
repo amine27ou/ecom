@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useAuthContext } from '../../contexts/AuthContext';
-import Loading from '../Loading';
+import { useAuthContext } from '../../../contexts/AuthContext';
+import Loading from '../../Loading';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { axiosClient } from '../../api/axios';
+import { axiosClient } from '../../../api/axios';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 export default function Checkout() {
