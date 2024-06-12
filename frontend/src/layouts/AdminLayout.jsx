@@ -40,6 +40,7 @@ export default function AdminLayout() {
           <Link to='/dashboard' className='text-black hover:text-gray-500'>Dashboard</Link>
           <Link to='/dashboard/products' className='text-black hover:text-gray-500'>Products</Link>
           <Link to='/dashboard/orders' className='text-black hover:text-gray-500'>Orders</Link>
+          <Link to='/dashboard/posts' className='text-black hover:text-gray-500'>Posts</Link>
         </nav>
       </div>
       <div className="flex-grow ml-[200px]">

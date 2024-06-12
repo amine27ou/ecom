@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -22,3 +23,4 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::apiResource('products',ProductController::class);
 Route::apiResource('orders',OrderController::class)->middleware('auth:sanctum');
+Route::apiResource('blogs',BlogController::class);
