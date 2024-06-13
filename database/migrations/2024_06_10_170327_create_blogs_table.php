@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
             $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
-            $table->string('featured_image')->nullable();
+            $table->string('featured_image');
             $table->timestamps();
         });
     }

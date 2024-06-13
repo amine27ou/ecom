@@ -17,6 +17,8 @@ import CartPage from "../components/client-side/cart/CartPage";
 import Checkout from "../components/client-side/cart/Checkout";
 import ShowProductDetails from "../components/client-side/product/ShowProductDetails";
 import Blogs from "../components/client-side/blogs/Blogs";
+import PostsList from "../components/admin-side/posts/PostsList";
+import AddPost from "../components/admin-side/posts/AddPost";
 
 export const router = createBrowserRouter([
     
@@ -91,6 +93,14 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/orders/:id/edit',
                 element:<UpdateOrder/>
+            },
+            {
+                path:'/dashboard/posts',
+                element:<PostsList/>
+            },
+            {
+                path:'/dashboard/posts/add',
+                element:<AddPost/>
             },
         ]
     }

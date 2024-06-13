@@ -36,7 +36,6 @@ export default function AddProduct() {
             }
         }
     }    
-    console.log(formData)
   return (
     <div>
         <div className='flex items-center justify-between'>
@@ -61,7 +60,7 @@ export default function AddProduct() {
             </div>
             <div className='flex flex-col'>
                 <label>Quantity<span className='text-red-600'>*</span>:</label>
-                <input onChange={handleChange} type='number' name='quantity' value={formData.quantity} placeholder='Quantity' className='bg-gray-300 text-black outline-none p-2 rounded-md'  />
+                <input onChange={handleChange} type='number' name='product_quantity' value={formData.quantity} placeholder='Quantity' className='bg-gray-300 text-black outline-none p-2 rounded-md'  />
                 {errors.quantity && <p className='text-red-500 mb-4'>{errors.quantity}</p>}
             </div>
             <div className='flex flex-col'>

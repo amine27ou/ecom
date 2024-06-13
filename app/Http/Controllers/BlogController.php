@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -39,11 +40,10 @@ class BlogController extends Controller
             'content' => 'required',
             'status' => 'required|in:draft,published,archived',
             'excerpt' => 'nullable|string',
-            'user_id' => 'required|exists:users,id',
             'featured_image' => 'required|image|max:2048',
         ]);
         $data['slug'] = Str::slug($request->title);
-
+        $data['user_id'] = Auth::id(); 
         if ($request->hasFile('featured_image')) {
             $imageName = 'blog_' . time() . '.' . $request->file('featured_image')->getClientOriginalExtension();
             $request->file('featured_image')->storeAs('blogs',$imageName,'public');
