@@ -93,7 +93,7 @@ export default function PostsList() {
                 <Link to={`/dashboard/posts/${post.id}`} className="font-bold text-lg hover:text-gray-500">{post.title}</Link>
                 <p className="text-sm text-gray-500">{post.excerpt}</p>
                 <button onClick={(e)=>{deletePost(e,post.id)}} className="mt-2 bg-red-600 text-white p-2 rounded-md cursor-pointer">Remove</button>
-                <button className="mt-2 bg-blue-600 text-white p-2 rounded-md cursor-pointer ml-5">Edit</button>
+                <Link to={`/dashboard/posts/${post.id}/edit`} className="mt-2 bg-blue-600 text-white p-2 rounded-md cursor-pointer ml-5">Edit</Link>
               </div>
             </div>
           ))

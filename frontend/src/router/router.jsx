@@ -19,6 +19,8 @@ import ShowProductDetails from "../components/client-side/product/ShowProductDet
 import Blogs from "../components/client-side/blogs/Blogs";
 import PostsList from "../components/admin-side/posts/PostsList";
 import AddPost from "../components/admin-side/posts/AddPost";
+import UpdatePost from "../components/admin-side/posts/UpdatePost";
+import ShowPost from "../components/client-side/blogs/ShowPost";
 
 export const router = createBrowserRouter([
     
@@ -61,6 +63,10 @@ export const router = createBrowserRouter([
                 path: '/blog',
                 element: <Blogs/>,
             },
+            {
+                path:'/blog/:id',
+                element:<ShowPost/>
+            }
         ],
     },
     {
@@ -97,11 +103,16 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/posts',
                 element:<PostsList/>
-            },
+                },
             {
                 path:'/dashboard/posts/add',
                 element:<AddPost/>
+                },
+            {
+                path:'/dashboard/posts/:id/edit',
+                element:<UpdatePost/>
             },
+            
         ]
     }
 ]);

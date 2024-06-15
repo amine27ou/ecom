@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import Loading from '../../Loading';
 import { axiosClient } from '../../../api/axios';
+import { Link } from 'react-router-dom';
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -64,10 +65,13 @@ export default function Blogs() {
           blogs.map(blog => (
             <div key={blog.id} className="p-4 border rounded-md shadow-md bg-gray-100 mb-4">
               <div className='w-20 h-20 bg-white'>
-                <img src={blog.featured_image} alt={blog.title} className='w-full h-full object-cover' />
+                <img src={post.featured_image && post.featured_image.includes('blog_') 
+                  ? `${import.meta.env.VITE_BACKEND_URL}storage/blogs/${post.featured_image}` 
+                  : post.featured_image
+                } alt={blog.title} className='w-full h-full object-cover' />
               </div>
               <div className="mt-2">
-                <p className="font-bold text-lg">{blog.title}</p>
+                <Link to={`/blog/${blog.id}`} className="font-bold text-lg">{blog.title}</Link>
                 <p className="text-sm text-gray-500">{blog.excerpt}</p>
                 <button className="mt-2 text-blue-500">Like</button>
               </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../contexts/AuthContext';
 import Logo from '../assets/logo.png';
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -37,10 +37,10 @@ export default function AdminLayout() {
       <div className={`sidebar bg-white shadow-inner ${isOpen ? 'left-0' : '-left-[300px]'} w-[200px] flex flex-col items-center py-4 fixed left-0 top-0 bottom-0 transition-all`}>
         <Link to='/'><img src={Logo} alt="Logo" className="w-20 mb-4" /></Link>
         <nav className='mt-10 flex items-start justify-start flex-col'>
-          <Link to='/dashboard' className='text-black hover:text-gray-500'>Dashboard</Link>
-          <Link to='/dashboard/products' className='text-black hover:text-gray-500'>Products</Link>
-          <Link to='/dashboard/orders' className='text-black hover:text-gray-500'>Orders</Link>
-          <Link to='/dashboard/posts' className='text-black hover:text-gray-500'>Posts</Link>
+          <NavLink to='/dashboard' className='text-black hover:text-gray-500'>Dashboard</NavLink>
+          <NavLink to='/dashboard/products' className='text-black hover:text-gray-500'>Products</NavLink>
+          <NavLink to='/dashboard/orders' className='text-black hover:text-gray-500'>Orders</NavLink>
+          <NavLink to='/dashboard/posts' className='text-black hover:text-gray-500'>Posts</NavLink>
         </nav>
       </div>
       <div className="flex-grow ml-[200px]">
