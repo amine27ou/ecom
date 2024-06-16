@@ -15,7 +15,7 @@ export default function ClientLayout() {
   const { user, logoutUser,getUser } = useAuthContext();
   const [profileNav, setProfileNav] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
-  const {cart,handleDeleteProduct} = useCartContext()  
+  const {cart,handleDeleteProduct,setCart} = useCartContext()  
 
   useEffect(() => {
     getUser()
@@ -65,14 +65,18 @@ export default function ClientLayout() {
                 <div className='bg-white border shadow-lg w-[140px] flex flex-col items-start z-30 rounded-md absolute top-10'>
                   {user.role === 'admin' && (
                     <span className='hover:bg-gray-300 p-2 w-full transition-all'>
-                      <Link to="/dashboard">Dashboard</Link>
+                      <Link to="/dashboard/stats">Dashboard</Link>
                     </span>
                   )}
                   <span className='hover:bg-gray-300 p-2 w-full transition-all'>
                     <Link to="/profile">Profile</Link>
                   </span>
                   <span className='hover:bg-gray-300 p-2 w-full transition-all'>
-                    <button onClick={logoutUser}>Logout</button>
+                    <button onClick={()=>{
+                                          logoutUser()
+                                          setCart([])
+                                          }}
+                                           >Logout</button>
                   </span>
                 </div>
               )}

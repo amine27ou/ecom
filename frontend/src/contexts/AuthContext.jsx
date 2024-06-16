@@ -69,6 +69,7 @@ export default function AuthContext({ children }) {
        axiosClient.post('logout');
       localStorage.removeItem('auth-token');
       setUser({});
+      setCa
       navigate('/');
     } catch (error) {
       

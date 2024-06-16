@@ -21,6 +21,8 @@ import PostsList from "../components/admin-side/posts/PostsList";
 import AddPost from "../components/admin-side/posts/AddPost";
 import UpdatePost from "../components/admin-side/posts/UpdatePost";
 import ShowPost from "../components/client-side/blogs/ShowPost";
+import About from "../components/client-side/About";
+import OrderItems from "../components/admin-side/orders/OrderItems";
 
 export const router = createBrowserRouter([
     
@@ -66,6 +68,10 @@ export const router = createBrowserRouter([
             {
                 path:'/blog/:id',
                 element:<ShowPost/>
+            },
+            {
+                path:'/about',
+                element:<About/>
             }
         ],
     },
@@ -73,7 +79,7 @@ export const router = createBrowserRouter([
         element:<AuthContext><AdminLayout/></AuthContext>,
         children:[
             {
-                path:'/dashboard',
+                path:'/dashboard/stats',
                 element:<Dashboard/>
             },
             {
@@ -111,6 +117,10 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/posts/:id/edit',
                 element:<UpdatePost/>
+            },
+            {
+                path:'/dashboard/order-items',
+                element:<OrderItems/>
             },
             
         ]

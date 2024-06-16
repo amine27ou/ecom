@@ -36,12 +36,48 @@ export default function AdminLayout() {
     <div className="flex flex-row h-screen">
       <div className={`sidebar bg-white shadow-inner ${isOpen ? 'left-0' : '-left-[300px]'} w-[200px] flex flex-col items-center py-4 fixed left-0 top-0 bottom-0 transition-all`}>
         <Link to='/'><img src={Logo} alt="Logo" className="w-20 mb-4" /></Link>
-        <nav className='mt-10 flex items-start justify-start flex-col'>
-          <NavLink to='/dashboard' className='text-black hover:text-gray-500'>Dashboard</NavLink>
-          <NavLink to='/dashboard/products' className='text-black hover:text-gray-500'>Products</NavLink>
-          <NavLink to='/dashboard/orders' className='text-black hover:text-gray-500'>Orders</NavLink>
-          <NavLink to='/dashboard/posts' className='text-black hover:text-gray-500'>Posts</NavLink>
-        </nav>
+      <nav className='flex flex-col mt-10 gap-5'>
+      <NavLink
+        to='/dashboard/stats'
+        className={({ isActive }) => 
+          `text-black hover:text-gray-500 w-full  ${isActive ? 'text-yellow-600' : ''}`
+        }
+      >
+        Dashboard
+      </NavLink>
+      <NavLink
+        to='/dashboard/products'
+        className={({ isActive }) => 
+          `text-black hover:text-gray-500 ${isActive ? 'text-yellow-600' : ''}`
+        }
+      >
+        Products
+      </NavLink>
+      <NavLink
+        to='/dashboard/orders'
+        className={({ isActive }) => 
+          `text-black hover:text-gray-500 ${isActive ? 'text-yellow-600' : ''}`
+        }
+      >
+        Orders
+      </NavLink>
+      <NavLink
+        to='/dashboard/posts'
+        className={({ isActive }) => 
+          `text-black hover:text-gray-500 ${isActive ? 'text-yellow-600' : ''}`
+        }
+      >
+        Posts
+      </NavLink>
+      <NavLink
+        to='/dashboard/order-items'
+        className={({ isActive }) => 
+          `text-black hover:text-gray-500 ${isActive ? 'text-yellow-600' : ''}`
+        }
+      >
+        Order Items
+      </NavLink>
+    </nav>
       </div>
       <div className="flex-grow ml-[200px]">
         <div className={`navbar shadow-sm bg-white ${isOpen ? 'left-[200px]' : 'left-0'} transition-all text-black p-4 flex items-center justify-between fixed top-0 right-0 z-10`}>

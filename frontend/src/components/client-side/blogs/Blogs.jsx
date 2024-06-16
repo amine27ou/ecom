@@ -15,7 +15,7 @@ export default function Blogs() {
         params: { title: searchTitle }
       });
       if (response.status === 200) {
-        setBlogs(response.data.blogs);
+        setBlogs(response.data.blogs.filter(blog=>blog.status === 'published'));
       }
     } catch (err) {
       console.error(err);
@@ -33,12 +33,13 @@ export default function Blogs() {
     setLoading(true);
     fetchBlogs(title);
   };
-  const AllPosts = (e)=>{
-    e.preventDefault()
-    setTitle('')
+
+  const AllPosts = (e) => {
+    e.preventDefault();
+    setTitle('');
     setLoading(true);
-    fetchBlogs()
-  }
+    fetchBlogs();
+  };
 
   return (
     <div className='p-5 bg-gray-200'>
@@ -65,9 +66,9 @@ export default function Blogs() {
           blogs.map(blog => (
             <div key={blog.id} className="p-4 border rounded-md shadow-md bg-gray-100 mb-4">
               <div className='w-20 h-20 bg-white'>
-                <img src={post.featured_image && post.featured_image.includes('blog_') 
-                  ? `${import.meta.env.VITE_BACKEND_URL}storage/blogs/${post.featured_image}` 
-                  : post.featured_image
+                <img src={blog.featured_image && blog.featured_image.includes('blog_') 
+                  ? `${import.meta.env.VITE_BACKEND_URL}storage/blogs/${blog.featured_image}` 
+                  : blog.featured_image
                 } alt={blog.title} className='w-full h-full object-cover' />
               </div>
               <div className="mt-2">
