@@ -12,15 +12,21 @@ class OrderController extends Controller
 {
     public function index(){
         $orders = Order::all();
+        $pending_orders = Order::where('status','Pending')->count();
+        $delivered_orders = Order::where('status','Delivered')->count();
+        $shipped_orders = Order::where('status','Shipped')->count();
+        $canceled_orders = Order::where('status','Canceled')->count();
+
         return response()->json([
-            'orders'=>$orders
+            'orders'=>$orders,
+            'pending_orders'=>$pending_orders,
+            'delivered_orders'=>$delivered_orders,
+            'shipped_orders'=>$shipped_orders,
+            'canceled_orders'=>$canceled_orders,
+            
         ]);
     }
-    // public function show (Order $order){
-    //     return response()->json([
-    //         'order'=>$order
-    //     ]);
-    // }
+
     public function store(Request $request)
 {
     $data = $request->validate([

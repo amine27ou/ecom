@@ -5,7 +5,7 @@ import LoginForm from "../components/client-side/LoginForm";
 import RegisterForm from "../components/client-side/RegisterForm";
 import AuthContext from "../contexts/AuthContext";
 import AdminLayout from "../layouts/AdminLayout";
-import Dashboard from "../components/admin-side/Dashboard";
+import Dashboard from "../components/admin-side/stats/Dashboard";
 import ProductsTable from "../components/admin-side/products/ProductsTable";
 import AddProduct from "../components/admin-side/products/AddProduct";
 import UpdateProduct from "../components/admin-side/products/UpdateProduct";
