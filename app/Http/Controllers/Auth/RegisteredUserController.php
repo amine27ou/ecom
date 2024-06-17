@@ -36,4 +36,23 @@ class RegisteredUserController extends Controller
         // Auth::login($user);
         return response()->noContent();
     }
+    public function updateUserData(Request $request){
+        $user = Auth::user();
+        $data = $request->validate([
+            'first_name'=> 'string',
+            'last_name'=> 'string',
+            'email'=> 'string',
+            'password'=> 'required',
+        ]);
+        if(Hash::check($data['password'], $user->password)){
+            $user->update($data);
+            return response()->json([
+                'message'=>'User Informations updated successfully!'
+            ]);
+        }else{
+            return response()->json([
+                'error'=>'incorrect password'
+            ]);
+        }
+    }
 }

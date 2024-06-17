@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -52,5 +53,5 @@ Route::get('/users', function () {
     }
 })->middleware('auth:sanctum');
 
-
+Route::put('/user/update', [RegisteredUserController::class, 'updateUserData'])->middleware('auth:sanctum');
 

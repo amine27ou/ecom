@@ -23,6 +23,7 @@ import UpdatePost from "../components/admin-side/posts/UpdatePost";
 import ShowPost from "../components/client-side/blogs/ShowPost";
 import About from "../components/client-side/About";
 import OrderItems from "../components/admin-side/orders/OrderItems";
+import Profile from "../components/admin-side/Profile/Profile";
 
 export const router = createBrowserRouter([
     
@@ -122,6 +123,10 @@ export const router = createBrowserRouter([
                 path:'/dashboard/order-items',
                 element:<OrderItems/>
             },
+            {
+                path:'/dashboard/profile',
+                element:<Profile/>
+            }
             
         ]
     }

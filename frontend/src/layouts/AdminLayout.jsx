@@ -96,7 +96,7 @@ export default function AdminLayout() {
                     <Link to="/">Main Page</Link>
                   </span>
                   <span className="hover:bg-gray-300 rounded-md p-2 w-full transition-all">
-                    <Link to="/profile">Profile</Link>
+                    <Link to="/dashboard/profile">Profile</Link>
                   </span>
                   <span className="hover:bg-gray-300 rounded-md p-2 w-full transition-all">
                     <button onClick={logoutUser}>Logout</button>
