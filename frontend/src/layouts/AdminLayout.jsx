@@ -9,7 +9,7 @@ import { IoMdClose } from "react-icons/io";
 export default function AdminLayout() {
   const [profileNav, setProfileNav] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
-  const { user, logoutUser, getUser } = useAuthContext();
+  const { user, logoutUser, getUser,setMessage,message } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function AdminLayout() {
 
       checkUser();
   }, [navigate]);
-
+  
   if (!user) {
     return <div>Loading...</div>;
   }
@@ -108,6 +108,9 @@ export default function AdminLayout() {
         </div>
         <main className={`bg-gray-200 min-h-screen absolute transition-all right-0 ${isOpen ? 'left-[200px]' : 'left-0'} text-black p-4 mt-[54px]`}>
           <Outlet />
+          {message && <div className='fixed top-20 bg-green-400 border border-green-700 p-2 rounded-md right-5'>
+            <p className='text-green-900'>{message}</p>
+          </div>}
         </main>
       </div>
     </div>

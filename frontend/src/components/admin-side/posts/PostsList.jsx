@@ -45,6 +45,7 @@ export default function PostsList() {
     e.preventDefault();
     try {
       await axiosClient.delete(`${import.meta.env.VITE_BACKEND_URL}api/blogs/${id}`);
+      setMessage(response.data.message)
       setPosts(posts.filter(post => post.id !== id));
     } catch (err) {
       console.error('Error deleting post:', err);

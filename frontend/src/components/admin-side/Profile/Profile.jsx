@@ -22,20 +22,33 @@ export default function Profile() {
     const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
-       try{
-        const response = await axiosClient.post(`${import.meta.env.VITE_BACKEND_URL}api/user/update`,{...formData,_method:'PUT'})
-        if(response.status === 200){
-            navigate('/dashboard/stats')
+        if(!formData.password){
+            setErrors({password:'Enter Your Password to apply changes!'})
         }
-       }catch(err){
-        if(err.response && err.response.status === 422){
-            setErrors(err.response.data.errors)
+        else{
+
+            try{
+                setLoading(true)
+                const response = await axiosClient.post(`${import.meta.env.VITE_BACKEND_URL}api/user/update`,{...formData,_method:'PUT'})
+            if(response.status === 200){
+                setLoading(false)
+                if(user.role === 'admin'){
+                    navigate('/dashboard/stats')
+                }else{
+                    navigate('/')
+                }
+            }
+        }catch(err){
+            if(err.response && err.response.status === 422){
+                setLoading(false)
+                setErrors(err.response.data.errors)
+            }
         }
-       }
+    }
     };
 
     useEffect(() => {
-        if (Object.values(user).every(info => info!== null || info !== undefined)) {
+        if (user && user.first_name && user.last_name && user.email) {
             setLoading(false);
             setFormData({
                 first_name: user.first_name,
@@ -59,7 +72,7 @@ export default function Profile() {
                             name='first_name'
                             placeholder="FIRST NAME*"
                             className={`border-0 border-b-[1px] border-black outline-none mb-5 placeholder-black ${errors.first_name && 'border-red-500 placeholder-red-500'}`}
-                            required
+                            
                         />
                         {errors.first_name && <p className='text-red-500 mb-4'>{errors.first_name}</p>}
 
@@ -70,7 +83,7 @@ export default function Profile() {
                             value={formData.last_name}
                             placeholder="LAST NAME*"
                             className={`border-0 border-b-[1px] border-black outline-none mb-5 placeholder-black ${errors.last_name && 'border-red-500 placeholder-red-500'}`}
-                            required
+                            
                         />
                         {errors.last_name && <p className='text-red-500 mb-4'>{errors.last_name}</p>}
 
@@ -81,7 +94,7 @@ export default function Profile() {
                             name='email'
                             placeholder="EMAIL ADDRESS*"
                             className={`border-0 border-b-[1px] border-black mb-5 outline-none placeholder-black ${errors.email && 'border-red-500 placeholder-red-500'}`}
-                            required
+                            
                         />
                         {errors.email && <p className='text-red-500 mb-4'>{errors.email}</p>}
 
@@ -95,7 +108,6 @@ export default function Profile() {
                             required
                         />
                         {errors.password && <p className='text-red-500 mb-4'>{errors.password}</p>}
-
 
                         <button
                             type="submit"

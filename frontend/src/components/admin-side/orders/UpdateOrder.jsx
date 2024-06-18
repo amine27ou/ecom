@@ -40,6 +40,7 @@ export default function UpdateOrder() {
               });
               if(response.status === 200){
                 setLoading(false)
+                setMessage(response.data.message)
                 navigate('/dashboard/orders')
             }
         }
@@ -50,7 +51,7 @@ export default function UpdateOrder() {
             }
         }
     }    
-    console.log(formData)
+    
     return (
     <div>
         <div className='flex items-center justify-between'>

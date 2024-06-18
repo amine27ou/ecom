@@ -4,11 +4,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import Loading from '../../Loading'
 import { FaEdit, FaEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useAuthContext } from '../../../contexts/AuthContext';
 
 export default function ProductsTable() {
     const [products,setProducts] = useState([])
     const [loading,setLoading] = useState(true)
     const navigate = useNavigate()
+    const {setMessage} = useAuthContext()
     const fetchProducts = async()=>{
         setLoading(true)
         try{
@@ -24,8 +26,10 @@ export default function ProductsTable() {
     const delProduct = async(e,id)=>{
         e.preventDefault()
         try{
-             await axiosClient.delete(`${import.meta.env.VITE_BACKEND_URL}api/products/${id}`)
-            
+             await axiosClient.delete(`${import.meta.env.VITE_BACKEND_URL}api/products/${id}`).then((res)=>{
+                setMessage(res.data.message)
+             })
+
         }catch(err){}
     }
 

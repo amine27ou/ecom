@@ -47,8 +47,8 @@ export const router = createBrowserRouter([
                 element: <Home/>,
             },
             {
-                path: '/store',
-                element: <p className="text-red-500">Store</p>,
+                path:'/about',
+                element:<About/>
             },
             {
                 path: '/cart',
@@ -73,6 +73,10 @@ export const router = createBrowserRouter([
             {
                 path:'/about',
                 element:<About/>
+            },
+            {
+                path:'/profile',
+                element:<Profile/>
             }
         ],
     },

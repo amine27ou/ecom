@@ -36,8 +36,14 @@ export default function ClientLayout() {
             Home
           </NavLink>
           <NavLink
-            to="/store"
-            className={({ isActive }) => (isActive ? 'text-yellow-600' : 'text-black')}
+            to="/"
+            className={'text-black'}
+            onClick={()=>{
+              window.scrollTo({
+                top:1600,
+                behavior:'smooth'
+              })
+            }}
           >
             Store
           </NavLink>
@@ -134,11 +140,17 @@ export default function ClientLayout() {
               Home
             </NavLink>
             <NavLink
-              to="/store"
-              className={({ isActive }) => (isActive ? 'text-yellow-600' : 'text-black')}
-            >
-              Store
-            </NavLink>
+            to="/"
+            className={'text-black'}
+            onClick={()=>{
+              window.scrollTo({
+                top:2200,
+                behavior:'smooth'
+              })
+            }}
+          >
+            Store
+          </NavLink>
             <NavLink
               to="/about"
               className={({ isActive }) => (isActive ? 'text-yellow-600' : 'text-black')}

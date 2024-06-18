@@ -21,13 +21,7 @@ export default function Orders() {
             return <h1>Error fetching orders</h1>
         }
     }
-    const delOrder = async(e,id)=>{
-        e.preventDefault()
-        try{
-             await axiosClient.delete(`${import.meta.env.VITE_BACKEND_URL}api/orders/${id}`)
-            
-        }catch(err){}
-    }
+    
 
     useEffect(()=>{
         fetchOrders()
@@ -66,9 +60,8 @@ export default function Orders() {
                             <td>{order.updated_at.split('T')[0]}</td>
                             <td>
                                 <div className='flex items-end  justify-center gap-2'>
-                                    <Link className='text-green-400' to={`/dashboard/orders/${order.id}`}><FaEye/></Link>
                                     <Link className='text-blue-400' to={`/dashboard/orders/${order.id}/edit`}><FaEdit/></Link>
-                                    <button onClick={(e) => delOrder(e, order.id)}><MdDelete className='text-red-600' /></button>
+                                    
                                 </div>
                             </td>
                         </tr>

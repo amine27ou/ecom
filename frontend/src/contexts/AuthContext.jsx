@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosClient } from '../api/axios';
 import axios from 'axios';
@@ -9,6 +9,7 @@ export default function AuthContext({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [message,setMessage] = useState()
 
   const navigate = useNavigate();
 
@@ -69,15 +70,19 @@ export default function AuthContext({ children }) {
        axiosClient.post('logout');
       localStorage.removeItem('auth-token');
       setUser({});
-      setCa
+      setCart({})
       navigate('/');
     } catch (error) {
       
     }
   };
-
+  useEffect(()=>{
+    setTimeout(()=>{
+      setMessage()
+    },6000)
+  },[message])
   return (
-    <LoginContext.Provider value={{ login, errors, user, getUser, loading, register,logoutUser }}>
+    <LoginContext.Provider value={{ login, errors, user, getUser, loading, register,logoutUser,message,setMessage }}>
       {children}
     </LoginContext.Provider>
   );

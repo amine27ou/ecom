@@ -22,7 +22,9 @@
         await axiosClient.post(`${import.meta.env.VITE_BACKEND_URL}api/blogs`,formData,{
           headers: {
           'Content-Type': 'multipart/form-data'
-        }})
+        }}).then((response)=>{
+          setMessage(response.data.message)
+        })
         navigate('/dashboard/posts');
       }catch(err){
         if (err.response && err.response.data.errors) {

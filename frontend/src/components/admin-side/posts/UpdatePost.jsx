@@ -61,6 +61,7 @@ export default function UpdatePost() {
       );
       if (response.status === 200) {
         setLoading(false);
+        setMessage(response.data.message)
         navigate('/dashboard/posts');
       }
     } catch (err) {

@@ -39,6 +39,7 @@ export default function UpdateProduct() {
                 },
               });
               if(response.status === 200){
+                setMessage(response.data.message)
                 setLoading(false)
                 navigate('/dashboard/products')
             }
